@@ -8,5 +8,5 @@ project(lab11)
 
 add_executable(
     run
-    src/taskA.cpp
+    src/codeforce_A.cpp
 )
