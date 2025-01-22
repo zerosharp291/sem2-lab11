@@ -3,111 +3,127 @@
 
 using namespace std;
 
-int main() {
-    long long n; // кол-во отзывов
-    cin >> n;
-    long long b; // велчина понижения доверия
-    cin >> b;
-    long long k; // кол-во подряд читаемых отзыва
-    cin >> k;
+int main()
+{
+    long long review_count; // кол-во отзывов
+    cin >> review_count;
+    long long reputation_decrease; // велчина понижения доверия
+    cin >> reputation_decrease;
+    long long streak; // кол-во подряд читаемых отзыва
+    cin >> streak;
 
-    vector<char> doverie; 
+    vector<char> reputation;
 
-    for (long long i = 0; i < n; i++) {
+    for (long long i = 0; i < review_count; i++)
+    {
         char x;
         cin >> x;
-        doverie.push_back(x);
+        reputation.push_back(x);
     }
 
-    if (b == 0) {
+    if (reputation_decrease == 0)
+    {
         cout << 0;
     }
-    else {
-        long long sum_of_bad_doverie = 0;
+    else
+    {
+        long long sum_of_bad_reputation = 0;
         long long bad_count = 0;
         long long good_count = 0;
-        long long current_good_doverie = 0;
-        long long number_in = 0;
-        long long number_out = 0;
-        long long total_mnogitel = 0;
+        long long current_good_reputation = 0;
+        long long left = 0;
+        long long right = 0;
+        long long reputation_increase = 0;
 
         bool flag = true;
 
-        for (long long i = 0; i < k; i++) {
-            if (doverie[i] == 'N'){
+        for (long long i = 0; i < streak; i++)
+        {
+            if (reputation[i] == 'N')
+            {
                 bad_count++;
             }
-            else {
+            else
+            {
                 good_count++;
             }
         }
-        number_out = k - 1;
+        right = streak - 1;
 
-        if (good_count == 0) {
+        if (good_count == 0)
+        {
             cout << -1 << endl;
         }
-        else {
-            sum_of_bad_doverie = bad_count * b;
+        else
+        {
+            sum_of_bad_reputation = bad_count * reputation_decrease;
 
             long long mnogitel = 0;
 
-            current_good_doverie = good_count * mnogitel;
+            current_good_reputation = good_count * mnogitel;
 
-            while (sum_of_bad_doverie > current_good_doverie){
+            while (sum_of_bad_reputation > current_good_reputation)
+            {
                 mnogitel++;
-                current_good_doverie = good_count * mnogitel;
+                current_good_reputation = good_count * mnogitel;
             }
 
-            total_mnogitel = mnogitel;
+            reputation_increase = mnogitel;
 
-            while (number_out < n) {
-                //cout << "ALARM 1" << endl;
-                if (doverie[number_in] == 'N'){
+            while (right < review_count)
+            {
+                if (reputation[left] == 'N')
+                {
                     bad_count--;
                 }
-                else {
+                else
+                {
                     good_count--;
                 }
-                number_in++;
-                number_out++;
-                if (number_out >= n){
+                left++;
+                right++;
+                if (right >= review_count)
+                {
                     break;
                 }
-                if (doverie[number_out] == 'N'){
+                if (reputation[right] == 'N')
+                {
                     bad_count++;
                 }
-                else {
+                else
+                {
                     good_count++;
                 }
 
-                sum_of_bad_doverie = bad_count * b;
+                sum_of_bad_reputation = bad_count * reputation_decrease;
 
-                long long mnogitel = total_mnogitel;
+                long long mnogitel = reputation_increase;
 
-                current_good_doverie = good_count * mnogitel;
+                current_good_reputation = good_count * mnogitel;
 
-                if (good_count != 0){
-                    while (sum_of_bad_doverie > current_good_doverie){
+                if (good_count != 0)
+                {
+                    while (sum_of_bad_reputation > current_good_reputation)
+                    {
                         mnogitel++;
-                        current_good_doverie = good_count * mnogitel;
-                        //cout << "Mnogitel = " << mnogitel << endl;
-                        //cout << "current_good_doverie = " << current_good_doverie << endl;
-                        //cout << "ALARM 2 ___" << endl;
+                        current_good_reputation = good_count * mnogitel;
                     }
                 }
-                else {
+                else
+                {
                     flag = false;
                     cout << -1 << endl;
                     break;
                 }
 
-                if (total_mnogitel < mnogitel) {
-                    total_mnogitel = mnogitel;
+                if (reputation_increase < mnogitel)
+                {
+                    reputation_increase = mnogitel;
                 }
-
             }
-            if (flag == true){
-                cout << total_mnogitel;
+            if (flag == true)
+            {
+                cout << reputation_increase;
             }
         }
     }
