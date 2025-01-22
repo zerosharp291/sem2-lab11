@@ -3,57 +3,65 @@
 
 using namespace std;
 
-int main() {
-    long long n; // количество солнечных дней
-    cin >> n;
-    long long m; // количество просьб горожан
-    cin >> m;
+int main()
+{
+    long long sunny_days_count; // количество солнечных дней
+    cin >> sunny_days_count;
+    long long requests_count; // количество просьб горожан
+    cin >> requests_count;
 
-    vector<int> sun_days;
-    for (int i = 0; i < n; i++) {
-        long long x;
-        cin >> x;
-        sun_days.push_back(x);
+    vector<int> sunny_days;
+
+    for (int i = 0; i < sunny_days_count; i++)
+    {
+        cin >> sunny_days[i];
     }
 
-    vector<int> request;
-    for (int i = 0; i < m; i++) {
-        long long y;
-        cin >> y;
-        request.push_back(y);  
+    vector<int> requests;
+
+    for (int i = 0; i < requests_count; i++)
+    {
+        cin >> requests[i];
     }
-    long long number_of_sun = 0;
-    long long number_of_request = 0;
 
-    while (request[number_of_request] >= sun_days[number_of_sun]){
-        number_of_sun++;
+    long long number_of_sunny_day = 0; // номер солнечного дня
+    long long number_of_request = 0;   // номер просьбы
+
+    while (requests[number_of_request] >= sunny_days[number_of_sunny_day])
+    {
+        number_of_sunny_day++;
     }
-    long long max_wait = sun_days[number_of_sun] - request[number_of_request];
-    long long min_wait = sun_days[number_of_sun] - request[number_of_request];
 
-    number_of_sun = 0;
+    long long max_wait = sunny_days[number_of_sunny_day] - requests[number_of_request];
+    long long min_wait = sunny_days[number_of_sunny_day] - requests[number_of_request];
 
-    while (number_of_sun < n) {
-        //cout << "ALARM1" << endl;
+    number_of_sunny_day = 0;
+
+    while (number_of_sunny_day < sunny_days_count)
+    {
         long long x = 0; // разность, время ожидания
-        if (request[number_of_request] < sun_days[number_of_sun]) {
-            //cout << "ALARM2" << endl;
-            x = sun_days[number_of_sun] - request[number_of_request];
-            if (x > max_wait) {
+        if (requests[number_of_request] < sunny_days[number_of_sunny_day])
+        {
+            x = sunny_days[number_of_sunny_day] - requests[number_of_request];
+            if (x > max_wait)
+            {
                 max_wait = x;
             }
-            else if (x < min_wait){
+            else if (x < min_wait)
+            {
                 min_wait = x;
             }
             number_of_request++;
-            if (number_of_request >= m) {
+            if (number_of_request >= requests_count)
+            {
                 break;
             }
         }
-        else {
-            //cout << "ALARM3" << endl;
-            number_of_sun++;
-            if (number_of_sun >= n) {
+        else
+        {
+            number_of_sunny_day++;
+            if (number_of_sunny_day >= sunny_days_count)
+            {
                 break;
             }
         }
