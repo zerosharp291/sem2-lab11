@@ -3,10 +3,6 @@
 #include <climits>
 using namespace std;
 
-// Значит так, нам нужно считать время подготовки и время работы отдельно. Делать это методом скользащего окна.
-// Потребуется всего один массив. Время подготовки в дни с маленьким кол-вом времени найти по условию.
-// Минимально потраченное время считать по времени подготовки.
-
 int main()
 {
     long long days_count; // общее кол-во дней
@@ -68,7 +64,8 @@ int main()
     }
     else
     {
-        long long result = min_sum_of_preparating += writing_time;
+        min_sum_of_preparating += writing_time;
+        long long result = min_sum_of_preparating;
         cout << first_day + 1 << endl
              << result;
     }

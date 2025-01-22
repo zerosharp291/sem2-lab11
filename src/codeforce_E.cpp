@@ -11,6 +11,7 @@ int main()
     cin >> requests_count;
 
     vector<int> sunny_days;
+    sunny_days.resize(sunny_days_count);
 
     for (int i = 0; i < sunny_days_count; i++)
     {
@@ -18,6 +19,7 @@ int main()
     }
 
     vector<int> requests;
+    requests.resize(requests_count);
 
     for (int i = 0; i < requests_count; i++)
     {
